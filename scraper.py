@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class Crawler:
+class ScraperFA:
 
     def __init__(self, titulo):
         self.url = "https://www.filmaffinity.com/es/search.php"
@@ -53,7 +53,7 @@ class Crawler:
 
 def main(fa_titulo):
     # instanciamos el objeto scraper del tipo Crawler
-    scraper = Crawler(fa_titulo)
+    scraper = ScraperFA(fa_titulo)
     scraper.mostrar()
             
         

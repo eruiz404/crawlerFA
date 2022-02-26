@@ -6,12 +6,15 @@ from bs4 import BeautifulSoup
 class ScraperFA:
 
     def __init__(self, titulo):
+        # definimos la url de búsqueda por defecto
         self.url = "https://www.filmaffinity.com/es/search.php"
+        # almacenamos el título pasado por parámetro
         self.titulo = titulo
 
     def search(self):
+        # asignamos variables
         keys, values = [], []
-        # buscamos en FilmAffinity
+        # buscamos en FilmAffinity con BeautifulSoup
         form_data = { 'stext': self.titulo }
         response = requests.post(self.url, data=form_data)
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -31,7 +34,8 @@ class ScraperFA:
             keys.append(dt.text.strip())
         for dd in infomovie.findAll('dd'):
             values.append(dd.text.strip())
-
+        
+        # devolvemos un diccionario con los valores obtenidos
         return dict(zip(keys, values))
 
     def mostrar(self):
@@ -52,7 +56,7 @@ class ScraperFA:
             contador += 1
 
 def main(fa_titulo):
-    # instanciamos el objeto scraper del tipo Crawler
+    # instanciamos el objeto scraper del tipo ScraperFA
     scraper = ScraperFA(fa_titulo)
     scraper.mostrar()
             
